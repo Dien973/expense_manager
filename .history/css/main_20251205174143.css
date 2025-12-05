@@ -1,0 +1,153 @@
+body {
+  background-color: rgb(253, 252, 234);
+}
+/*----------FORM ĐĂNG NHẬP------------*/
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-container form {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: #000 solid 2px;
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  width: 50rem;
+  text-align: center;
+}
+
+.form-container form h3 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.form-container form .box {
+  width: 100%;
+  padding: 1.2rem 1.4rem;
+  font-size: 1.8rem;
+  color: #000;
+  border: #000 solid 2px;
+  background-color: #fff;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.form-container form i {
+  color: #000;
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.form-container form p,
+.form-container form .forgot-pwd {
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  color: #666;
+}
+
+.form-container form p a {
+  color: #9e9d9d;
+}
+
+.form-container form p a:hover {
+  text-decoration: underline;
+}
+
+/*-- forgot password --*/
+.form-container form .forgot-pwd {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* --- EYE TRONG Ô INPUT --- */
+
+.form-container form .inpt {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-container form .inpt input.box {
+  width: 100%;
+  padding-right: 45px;
+  box-sizing: border-box;
+}
+
+.form-container form .toggle-eye,
+.form-container form .eye {
+  position: absolute !important;
+  right: 15px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 42px;
+  cursor: pointer;
+  color: #aaa;
+  z-index: 10;
+}
+
+/*---------- THÔNG BÁO------------*/
+.message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+/* Hộp thông báo */
+.message-box {
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 350px;
+  max-width: 80%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: popupShow 0.25s ease-out;
+}
+
+/* Nội dung */
+.message-box span {
+  font-size: 2rem;
+  color: #000;
+}
+
+/* Icon đóng */
+.message-box i {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 2.2rem;
+  color: #c0392b;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.message-box i:hover {
+  transform: rotate(90deg);
+}
+
+/* Animation hiển thị */
+@keyframes popupShow {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

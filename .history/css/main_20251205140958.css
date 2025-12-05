@@ -1,0 +1,74 @@
+body {
+  background-color: rgb(253, 252, 234);
+}
+/*----------FORM ĐĂNG NHẬP------------*/
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-container form {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: #000 solid 2px;
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  width: 50rem;
+  text-align: center;
+}
+
+.form-container form h3 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.form-container form .inpt {
+  display: flex;
+  align-items: center; /* Căn chỉnh theo chiều dọc */
+  gap: 10px; /* Tạo khoảng cách giữa icon và input */
+}
+.form-container form .box {
+  width: 100%;
+  padding: 1.2rem 1.4rem;
+  font-size: 1.8rem;
+  color: #000;
+  border: #000 solid 2px;
+  background-color: #fff;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+#eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  /* Tùy chọn: đổi màu cho dễ nhìn */
+  color: #aaa;
+}
+
+.form-container form i {
+  color: #000;
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.form-container form p {
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  color: #666;
+}
+
+.form-container form p a {
+  color: #9e9d9d;
+}
+
+.form-container form p a:hover {
+  text-decoration: underline;
+}
