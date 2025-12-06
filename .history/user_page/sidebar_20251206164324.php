@@ -51,7 +51,7 @@
                     <span class="tooltip">Báo Cáo</span>
             </li>
             <li>
-                <a href="../user_page/account.php">
+                <a href="../user_page/header.php">
                     <i class='bx bxs-user' ></i>
                     <span class="links-name">Tài Khoản</span>
                 </a>

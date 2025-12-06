@@ -177,16 +177,6 @@ body {
 }
 
 /*---------- ACCOUNT ------------*/
-.title {
-  font-size: 3rem;
-  font-family: "Times New Roman";
-  text-shadow: #666 1px 1px 2px;
-  color: #000;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-}
-
 .profile {
   margin-left: 80px;
   padding: 20px;
@@ -254,21 +244,20 @@ body {
   transition: all 0.3s ease;
 }
 
-.profile form .avatar {
+.profile .avatar {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #ddd;
-  margin: 20px auto 15px;
+  margin-bottom: 15px;
   position: relative;
 }
 
-.profile form .avatar img {
+.profile .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .profile .avatar input[type="file"] {
