@@ -21,7 +21,6 @@ session_start();
    <link rel="stylesheet" href="../css/sidebar.css">
 </head>
 <body>
-    <?php @include 'sidebar.php'; ?>
-    
+    <?php @include 'silebar.php'; ?>
 </body>
 </html>

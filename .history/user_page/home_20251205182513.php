@@ -14,14 +14,12 @@ session_start();
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="../css/main.css">
-   <link rel="stylesheet" href="../css/sidebar.css">
+   <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
-    <?php @include 'sidebar.php'; ?>
-    
+    <?php @include 'header.php'; ?>
 </body>
 </html>

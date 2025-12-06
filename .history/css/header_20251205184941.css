@@ -1,0 +1,139 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(243, 241, 200);
+  z-index: 1000;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.header .flex {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  max-width: 1400px;
+  position: relative;
+  max-height: 3vh;
+}
+
+.header .flex li {
+  list-style: none;
+  float: left;
+  position: relative;
+}
+
+.header .flex li a {
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  display: block;
+  color: #494848;
+  text-transform: capitalize;
+}
+/*
+.header .flex .logo {
+  font-size: 2.5rem;
+  color: #cfeadb;
+}
+
+
+
+
+
+.header .flex li a:hover {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.header .flex li ul {
+  position: absolute;
+  left: 0;
+  width: 15rem;
+  background-color: #fff;
+  animation: fadeIn 0.2s linear;
+  display: none;
+}
+
+.header .flex li ul li {
+  width: 100%;
+}
+
+.header .flex li:hover ul {
+  display: inline-block;
+  position: absolute;
+  background-color: #28a745;
+  width: 150px;
+}
+
+.header .flex .icons > * {
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.header .flex .icons > *:hover {
+  color: #3b3b98;
+}
+
+.header .flex .icons span {
+  font-size: 2rem;
+}
+
+.header .flex .account-box {
+  position: absolute;
+  top: 120%;
+  right: 2rem;
+  background-color: #fff;
+  border: solid 2px #000;
+  text-align: center;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  width: 33rem;
+  display: none;
+  animation: fadeIn 0.2s linear;
+}
+
+.header .flex .account-box.active {
+  display: block;
+}
+
+.header .flex .account-box p {
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.header .flex .account-box p span {
+  color: #3b3b98;
+}
+
+.header .flex .account-box .delete-btn {
+  margin-top: 0.5rem;
+}
+
+/*----------------------------------------*
+.header .flex {
+  padding: 2rem;
+}
+
+.header .flex .navbar ul li {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.header .flex li ul {
+  position: static;
+  width: 100%;
+  animation: none;
+  background-color: var(--light-bg);
+}
+
+.header .flex li ul li {
+  padding-left: 2rem;
+}
+*/

@@ -22,6 +22,11 @@ session_start();
 </head>
 <body>
     <?php @include 'sidebar.php'; ?>
-    
+    <div id="popup" class="popup">
+    <div class="popup-box">
+        <p id="popup-message">Thông báo ở đây</p>
+        <button id="popup-ok">OK</button>
+    </div>
+</div>
 </body>
 </html>

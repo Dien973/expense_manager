@@ -22,6 +22,5 @@ session_start();
 </head>
 <body>
     <?php @include 'sidebar.php'; ?>
-    
 </body>
 </html>

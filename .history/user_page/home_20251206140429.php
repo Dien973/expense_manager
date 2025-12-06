@@ -18,10 +18,8 @@ session_start();
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="../css/main.css">
-   <link rel="stylesheet" href="../css/sidebar.css">
 </head>
 <body>
     <?php @include 'sidebar.php'; ?>
-    
 </body>
 </html>

@@ -1,0 +1,172 @@
+/* ====== HEADER ====== */
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #28a745;
+  z-index: 1000;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Flex container */
+.header .flex {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  max-width: 1400px;
+  position: relative;
+  max-height: 8vh;
+}
+
+/* Logo */
+.header .flex .logo {
+  font-size: 2.5rem;
+  color: #cfeadb;
+}
+
+/* Menu items */
+.header .flex li {
+  list-style: none;
+  float: left;
+  position: relative;
+}
+
+.header .flex li a {
+  font-size: 2rem;
+  padding: 1rem 1.5rem;
+  display: block;
+  color: #cfeadb;
+  text-transform: capitalize;
+}
+
+.header .flex li a:hover {
+  background-color: #24923d;
+  color: #fff;
+}
+
+/* ====== DROPDOWN FIXED ====== */
+.header .flex li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 150px;
+  background-color: #28a745;
+  display: none;
+  animation: fadeIn 0.2s linear;
+  z-index: 9999;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.header .flex li ul li {
+  width: 100%;
+  padding: 0;
+}
+
+.header .flex li:hover ul {
+  display: block;
+}
+
+/* ====== USER ICON ====== */
+.header .flex .icons > * {
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.header .flex .icons > *:hover {
+  color: #3b3b98;
+}
+
+/* ====== ACCOUNT BOX (User Info popup) ====== */
+.header .flex .account-box {
+  position: absolute;
+  top: 120%;
+  right: 2rem;
+  background-color: #fff;
+  border: solid 2px #000;
+  text-align: center;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  width: 33rem;
+  display: none;
+  animation: fadeIn 0.2s linear;
+}
+
+.header .flex .account-box.active {
+  display: block;
+}
+
+.header .flex .account-box p {
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  color: #666;
+}
+
+.header .flex .account-box p span {
+  color: #3b3b98;
+}
+
+/* ====== ANIMATION ====== */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====== MESSAGE POPUP ====== */
+.message {
+  position: relative;
+  padding: 1.5rem 2rem;
+  background: #e8ffd9;
+  border-left: 5px solid #28a745;
+  color: #000;
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 6px;
+  font-size: 1.8rem;
+}
+
+.message i {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  cursor: pointer;
+  color: #c0392b;
+  font-size: 2rem;
+}
+
+.message i:hover {
+  transform: rotate(90deg);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .header .flex {
+    flex-wrap: wrap;
+  }
+
+  .header .flex li {
+    width: 100%;
+  }
+
+  .header .flex li a {
+    width: 100%;
+  }
+
+  .header .flex li ul {
+    position: static;
+    width: 100%;
+  }
+}
