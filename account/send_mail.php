@@ -18,7 +18,7 @@ function sendMail($email, $reset_link){
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
 
-        // ⚠ ĐIỀN EMAIL & APP PASSWORD CỦA BẠN
+        // ⚠ ĐIỀN EMAIL & APP PASSWORD
         $mail->Username   = 'dientran7890@gmail.com';
         $mail->Password   = 'wggb dqxo gnyf hntp';
 

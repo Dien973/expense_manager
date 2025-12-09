@@ -98,7 +98,7 @@ body {
   align-items: center;
 }
 
-.form-container form .inpt input.box {
+.form-container form .inpt input .box {
   width: 100%;
   padding-right: 45px;
   box-sizing: border-box;
@@ -298,3 +298,51 @@ body {
   border-radius: 5px;
   font-size: 12px;
 }
+
+/*---------- CATEROGY ------------
+.caterogy .title {
+  margin-top: 20px;
+}
+
+.caterogy {
+  margin-left: 80px;
+  padding: 20px;
+}
+
+.category-container {
+  width: 80%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.tab.active {
+  background-color: #567bb2;
+  color: #fff;
+  border-color: #567bb2;
+}
+
+.tab-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tab-content li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #ccc;
+}
+*/

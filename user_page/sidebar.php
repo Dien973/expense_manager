@@ -30,7 +30,7 @@
                     <span class="tooltip">Chi Tiêu</span>
             </li>
             <li>
-                <a href="category.php">
+                <a href="../user_page/category.php">
                     <i class='bx bxs-category-alt' ></i>
                     <span class="links-name">Doanh Mục</span>
                 </a>
