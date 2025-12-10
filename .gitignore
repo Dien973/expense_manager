@@ -4,3 +4,5 @@ header.css
 assets
 qly_chi_tieu.sql
 .history
+.expense.php
+debug.log

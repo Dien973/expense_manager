@@ -11,7 +11,6 @@ $user_id = $_SESSION['user_id'];
 $user_role = $_SESSION['user_role'] ?? 'user';
 $message = '';
 
-
 //Xoa doanh muc
 if(isset($_GET['delete_id'])){
     $delete_id = $_GET['delete_id'];
@@ -161,9 +160,9 @@ $expense_categories = getCategoriesForUser($conn, $user_id, 'Chi tiêu');
                                     <button class="edit-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
                                         <i class='bx bx-edit'></i> Sửa
                                     </button> 
-                                    <a href="?delete_id=<?php echo $row['category_id']; ?>" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');">
+                                    <button class="delete-btn" onclick="openDeleteModal(<?php echo $row['category_id']; ?>, '<?php echo htmlspecialchars($row['category_name'], ENT_QUOTES); ?>')">
                                         <i class='bx bx-trash'></i> Xóa
-                                    </a>
+                                    </button>
                                 <?php endif; ?>
                             </div>
                         </li>
@@ -214,18 +213,41 @@ $expense_categories = getCategoriesForUser($conn, $user_id, 'Chi tiêu');
 
                             <div class="category-actions">
                                 <?php if($row['is_system'] == 0 && $row['uid'] == $user_id): ?>
-                                    <button class="edit-btn cate-act-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
+                                    <button class="edit-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
                                         <i class='bx bx-edit'></i> Sửa
                                     </button> 
-                                    <a href="?delete_id=<?php echo $row['category_id']; ?>" class="delete-btn cate-act-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');">
+                                    <button class="delete-btn" onclick="openDeleteModal(<?php echo $row['category_id']; ?>, '<?php echo htmlspecialchars($row['category_name'], ENT_QUOTES); ?>')">
                                         <i class='bx bx-trash'></i> Xóa
-                                    </a>
+                                    </button>
                                 <?php endif; ?>
                             </div>
                         </li>
                     <?php endwhile; ?>
                 <?php endif; ?>
             </ul>
+        </div>
+    </div>
+
+    <div class="delete-confirm-modal" id="deleteModal">
+        <div class="delete-confirm-content">
+            <div class="delete-confirm-header">
+                <i class='bx bx-error'></i>
+                <h3>Xác Nhận Xóa</h3>
+            </div>
+            
+            <div class="delete-confirm-body">
+                <p>Bạn có chắc chắn muốn xóa danh mục này?</p>
+                <p><strong id="categoryToDeleteName"></strong></p>
+            </div>
+            
+            <div class="delete-confirm-actions">
+                <button class="btn-cancel-delete" onclick="closeDeleteModal()">
+                    <i class='bx bx-x'></i> Hủy
+                </button>
+                <button class="btn-confirm-delete" id="confirmDeleteBtn">
+                    <i class='bx bx-check'></i> Xác Nhận Xóa
+                </button>
+            </div>
         </div>
     </div>
 
@@ -325,6 +347,29 @@ $expense_categories = getCategoriesForUser($conn, $user_id, 'Chi tiêu');
                 const target = tab.getAttribute('data-target');
                 document.getElementById(target).classList.add('active');
             });
+        });
+
+        function openDeleteModal(categoryId, categoryName) {
+            categoryToDeleteId = categoryId;
+            document.getElementById('categoryToDeleteName').textContent = categoryName;
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            categoryToDeleteId = null;
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (categoryToDeleteId) {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="bx bx-loader bx-spin"></i> Đang xóa...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    window.location.href = `?delete_id=${categoryToDeleteId}`;
+                }, 500);
+            }
         });
 
         function openAddModal(type) {
