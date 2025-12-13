@@ -5,6 +5,52 @@
   font-family: Arial, sans-serif;
 }
 
+.category-header {
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.back-button {
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.table-type {
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.type-income {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.type-expense {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
 /* ======================= */
 .status-summary {
   display: grid;
@@ -19,7 +65,14 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
   border-top: 4px solid;
+}
+
+.status-card-income {
   border-color: #27ae60;
+}
+
+.status-card-expense {
+  border-color: #e74c3c;
 }
 
 .status-card h3 {
@@ -159,6 +212,7 @@
   padding: 15px 20px;
   font-size: 1.3rem;
   vertical-align: middle;
+  text-align: left;
 }
 
 .table-icon {
@@ -198,6 +252,10 @@
 
 .amount-income {
   color: #27ae60;
+}
+
+.amount-expense {
+  color: #e74c3c;
 }
 
 .table-actions {
@@ -440,6 +498,46 @@
   background: #4669a1;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(86, 123, 178, 0.3);
+}
+
+/* ======================= */
+.delete-content i {
+  font-size: 3rem;
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.delete-content p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-cancel {
+  padding: 10px 25px;
+  background: #95a5a6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  padding: 10px 25px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ======================= */

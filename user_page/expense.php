@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_all'])) {
     $delete_month = $_POST['month'] ?? date('m');
     $delete_category = $_POST['category'] ?? '';
 
-    $delete_where = ["uid = ?", "transaction_type = 'Thu nhập'"];
+    $delete_where = ["uid = ?", "transaction_type = 'Chi tiêu'"];
     $delete_params = [$user_id];
     $delete_types = "i";
 
@@ -62,7 +62,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_income'])) {
     if($amount <= 0) {
         $message = "Số tiền phải lớn hơn 0!";
     } else {
-        $stmt = $conn->prepare("INSERT into transactions (uid, category_id, transaction_amount, transaction_date, transaction_note, transaction_type) values (?, ?, ?, ?, ?, 'Thu nhập')");
+        $stmt = $conn->prepare("INSERT into transactions (uid, category_id, transaction_amount, transaction_date, transaction_note, transaction_type) values (?, ?, ?, ?, ?, 'Chi tiêu')");
         if($stmt === false) {
             die('Lỗi SQL: ' . $conn->error);
         }
@@ -70,19 +70,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_income'])) {
         $stmt->bind_param("iidss", $user_id, $category_id, $amount, $transaction_date, $note);
 
         if($stmt->execute()) {
-            $message = 'Thêm thu nhập thành công!';
+            $message = 'Thêm chi tiêu thành công!';
             header("refresh:1;url=income.php");
             exit();
         } else {
-            $message = 'Lỗi khi thêm thu nhập: ' . $stmt->error;
+            $message = 'Lỗi khi thêm chi tiêu: ' . $stmt->error;
         }
     }
 }
 
-// ======================= XÓA THU NHẬP ======================= //
+// ======================= XÓA CHI TIÊU ======================= //
 if(isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
-    $stmt = $conn->prepare("DELETE from transactions where transaction_id = ? and uid = ? and transaction_type = 'Thu nhập'");
+    $stmt = $conn->prepare("DELETE from transactions where transaction_id = ? and uid = ? and transaction_type = 'Chi tiêu'");
 
     if($stmt === false) {
         die('Lỗi SQL: ' . $conn->error);
@@ -91,17 +91,17 @@ if(isset($_GET['delete_id'])) {
     $stmt->bind_param("ii", $delete_id, $user_id);
 
     if($stmt->execute()) {
-        $message = 'Xóa thu nhập thành công!';
+        $message = 'Xóa chi tiêu thành công!';
         header("refresh:1;url=income.php");
         exit();
     } else {
-        $message = 'Lỗi khi xóa thu nhập!';
+        $message = 'Lỗi khi xóa chi tiêu!';
     }
 }
 
 // ======================= LẤY DANH MỤC ======================= //
 $categories_stmt = $conn->prepare("SELECT * from categories where (is_system = 1 or uid= ?)
-                                        and category_type = 'Thu nhập'
+                                        and category_type = 'Chi tiêu'
                                         order by is_system desc, category_name asc");
 $categories_stmt->bind_param("i", $user_id);
 $categories_stmt->execute();
@@ -111,8 +111,8 @@ $filter_month = $_GET['month'] ?? date('m');
 $filter_year = date('Y');
 $filter_category = $_GET['category'] ?? '';
 
-// ====== TÍNH TỔNG THU THEO FILTER ============== //
-$total_where = ["uid = ?", "transaction_type = 'Thu nhập'"];
+// ====== TÍNH TỔNG CHI THEO FILTER ============== //
+$total_where = ["uid = ?", "transaction_type = 'Chi tiêu'"];
 $total_params = [$user_id];
 $total_types = "i";
 
@@ -145,7 +145,7 @@ $total_result = $total_stmt->get_result();
 $total_income = $total_result->fetch_assoc()['total'] ?? 0;
 
 // Lấy giao dịch thu nhập
-$where_conditions = ["t.uid = ?", "transaction_type = 'Thu nhập'"];
+$where_conditions = ["t.uid = ?", "transaction_type = 'Chi tiêu'"];
 $params = [$user_id];
 $param_types = "i";
 
@@ -191,7 +191,7 @@ $transactions = $transactions_stmt->get_result();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Thu Nhập</title>
+    <title>Quản Lý Chi Tiêu</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -215,12 +215,12 @@ $transactions = $transactions_stmt->get_result();
     <?php endif; ?>
 
     <div class="transaction-container">
-        <h1 class="title">Thu Nhập</h1>
+        <h1 class="title">Chi Tiêu</h1>
 
         <div class="status-summary">
-            <div class="status-card">
-                <h3>Tổng Thu Tháng <?php echo $filter_month; ?></h3>
-                <div class="status-amount">+<?php echo number_format($total_income, 0, ',', '.'); ?> ₫</div>
+            <div class="status-card status-card-expense">
+                <h3>Tổng Chi Tháng <?php echo $filter_month; ?></h3>
+                <div class="status-amount">-<?php echo number_format($total_income, 0, ',', '.'); ?> ₫</div>
             </div>
         </div>
 
@@ -256,7 +256,7 @@ $transactions = $transactions_stmt->get_result();
         
         <div class="transaction-btn">
             <button class="add-transaction-btn" onclick="openAddModal()">
-                <i class='bx bx-plus-circle'></i> Thêm Thu Nhập
+                <i class='bx bx-plus-circle'></i> Thêm Chi Tiêu
             </button>
 
             <button class="delete-transaction-btn" onclick="confirmDeleteAll()">
@@ -271,10 +271,10 @@ $transactions = $transactions_stmt->get_result();
                         <thead>
                             <tr>
                                 <th width="50px"></th>
-                                <th width="200px" style="text-align: center;">Danh mục</th>
-                                <th style="text-align: center;">Mô tả</th>
+                                <th width="200px" style="text-align: left;">Danh mục</th>
+                                <th style="text-align: left;">Mô tả</th>
                                 <th width="120px" style="text-align: center;">Ngày</th>
-                                <th width="150px" style="text-align: center;">Số tiền</th>
+                                <th width="200px" style="text-align: center;">Số tiền</th>
                                 <th width="120px"></th>
                             </tr>
                         </thead>
@@ -297,8 +297,8 @@ $transactions = $transactions_stmt->get_result();
                                     <td class="table-date">
                                          <?php echo date('d/m/Y', strtotime($row['transaction_date'])); ?>
                                     </td>
-                                    <td class="table-amount amount-income">
-                                        +<?php echo number_format($row['transaction_amount'], 0, ',', '.'); ?> ₫ 
+                                    <td class="table-amount amount-expense">
+                                        -<?php echo number_format($row['transaction_amount'], 0, ',', '.'); ?> ₫ 
                                     </td>
                                     <td>
                                         <div class="table-actions">
@@ -329,7 +329,7 @@ $transactions = $transactions_stmt->get_result();
 
                         <div class="summary-box">
                             <div class="summary-label">
-                                Tổng thu tháng <?php echo $filter_month; ?>
+                                Tổng chi tháng <?php echo $filter_month; ?>
                                 <?php if($filter_category): ?>
                                     <br><small>(theo danh mục)</small>
                                 <?php endif; ?>
@@ -353,7 +353,7 @@ $transactions = $transactions_stmt->get_result();
             <?php else: ?>
                 <div class="no-transaction-table">
                     <i class='bx bx-money-withdraw'></i>
-                    <p>Chưa có giao dịch thu nhập nào.</p>
+                    <p>Chưa có giao dịch chi tiêu nào.</p>
                 </div>
         <?php endif; ?>
     </div> 
@@ -362,7 +362,7 @@ $transactions = $transactions_stmt->get_result();
     <div class="modal-overlay transaction-modal" id="transactionModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Thêm Thu Nhập</h3>
+                <h3 class="modal-title" id="modalTitle">Thêm Chi Tiêu</h3>
                 <button class="close-modal" type="button" onclick="closeModal()">&times;
                 </button>
             </div>
@@ -416,7 +416,7 @@ $transactions = $transactions_stmt->get_result();
 
                 <div class="save-category-btn">
                     <button class="save-btn" type="submit">
-                        <i class='bx bx-save'></i> Lưu Thu Nhập
+                        <i class='bx bx-save'></i> Lưu Chi Tiêu
                     </button>
                 </div>
             </form>
@@ -433,20 +433,18 @@ $transactions = $transactions_stmt->get_result();
             </div>
 
             <div class="modal-body">
-                <div class="delete-message">
-                    <i class='bx bx-error' style="font-size: 3rem; color: #e74c3c; margin-bottom: 15px;"></i>
-                    <p style="font-size: 1.2rem; color: #333; margin-bottom: 20px;">
+                <div class="delete-content">
+                    <i class='bx bx-error'></i>
+                    <p>
                         Bạn có chắc chắn muốn xóa giao dịch này?
                     </p>
                 </div>
 
-                <div class="modal-actions" style="display: flex; gap: 15px; justify-content: center;">
-                    <button class="btn-cancel" type="button" onclick="closeSimpleDeleteModal()" 
-                            style="padding: 10px 25px; background: #95a5a6; color: white; border: none; border-radius: 6px; font-size: 1.1rem; cursor: pointer;">
+                <div class="modal-actions">
+                    <button class="btn-cancel" type="button" onclick="closeSimpleDeleteModal()">
                         Hủy
                     </button>
-                    <button class="btn-confirm" id="confirmDeleteBtn"
-                            style="padding: 10px 25px; background: #e74c3c; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: 600; cursor: pointer;">
+                    <button class="btn-confirm" id="confirmDeleteBtn">
                         Xác nhận xóa
                     </button>
                 </div>
@@ -513,7 +511,7 @@ $transactions = $transactions_stmt->get_result();
         let deleteTransactionId = null;
 
         function openAddModal() {
-            document.getElementById('modalTitle').textContent = 'Thêm Thu Nhập';
+            document.getElementById('modalTitle').textContent = 'Thêm Chi Tiêu';
             document.getElementById('transactionForm').reset();
             document.getElementById('transactionId').value = '';
             document.getElementById('transactionDate').value = '<?php echo date('Y-m-d'); ?>';
@@ -534,7 +532,7 @@ $transactions = $transactions_stmt->get_result();
                         return;
                     }
 
-                    document.getElementById('modalTitle').textContent = 'Sửa Thu Nhập';
+                    document.getElementById('modalTitle').textContent = 'Sửa Chi Tiêu';
                     document.getElementById('transactionId').value = data.transaction_id;
                     document.getElementById('amount').value = data.transaction_amount;
                     document.getElementById('categoryId').value = data.category_id;

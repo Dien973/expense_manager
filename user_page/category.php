@@ -123,48 +123,50 @@ $expense_categories = getCategoriesForUser($conn, $user_id, 'Chi tiêu');
             <ul class="category-list">
                 <?php if($income_categories->num_rows > 0): ?>
                     <?php while($row = $income_categories->fetch_assoc()): ?>
-                        <li class="category-item <?php echo $row['is_system'] == 1 ? 'system-item' : 'personal-item'; ?>">
-                            <div class="category-header">
-                                <div class="category-icon">
-                                    <i class='<?php echo $row['category_icon']; ?>'></i>
+                        <li>
+                            <a href="detail_category.php?id=<?php echo $row['category_id']; ?>" class="category-item <?php echo $row['is_system'] == 1 ? 'system-item' : 'personal-item'; ?>">
+                                <div class="category-header">
+                                    <div class="category-icon">
+                                        <i class='<?php echo $row['category_icon']; ?>'></i>
+                                    </div>
+                                    <div class="category-name">
+                                        <?php echo htmlspecialchars($row['category_name']); ?>
+                                    </div>
                                 </div>
-                                <div class="category-name">
-                                    <?php echo htmlspecialchars($row['category_name']); ?>
-                                </div>
-                            </div>
 
-                            <div class="category-bages">
-                                <span class="type-badge income-badge">
-                                    <?php echo $row['category_type']; ?>
-                                </span>
-                                <?php if($row['is_system'] == 1): ?>
-                                    <span class="system-badge">
-                                        <i class='bx bx-globe'></i>Hệ Thống
-                                    </span>
-                                <?php else: ?>
-                                    <span class="personal-badge">
-                                        <i class='bx bx-user'></i>Cá Nhân
-                                    </span>
+                                
+                                <?php if(!empty($row['category_note'])): ?>
+                                    <div class="category-note">
+                                        <i class='bx bx-note'></i>
+                                        <?php echo htmlspecialchars($row['category_note']); ?>
+                                    </div>
                                 <?php endif; ?>
-                            </div>
 
-                            <?php if(!empty($row['category_note'])): ?>
-                                <div class="category-note">
-                                    <i class='bx bx-note'></i>
-                                    <?php echo htmlspecialchars($row['category_note']); ?>
+                                <div class="category-bages">
+                                    <span class="type-badge income-badge">
+                                        <?php echo $row['category_type']; ?>
+                                    </span>
+                                    <?php if($row['is_system'] == 1): ?>
+                                        <span class="system-badge">
+                                            <i class='bx bx-globe'></i>Hệ Thống
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="personal-badge">
+                                            <i class='bx bx-user'></i>Cá Nhân
+                                        </span>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
-
-                            <div class="category-actions">
-                                <?php if($row['is_system'] == 0 && $row['uid'] == $user_id): ?>
-                                    <button class="edit-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
-                                        <i class='bx bx-edit'></i> Sửa
-                                    </button> 
-                                    <button class="delete-btn" onclick="openDeleteModal(<?php echo $row['category_id']; ?>, '<?php echo htmlspecialchars($row['category_name'], ENT_QUOTES); ?>')">
-                                        <i class='bx bx-trash'></i> Xóa
-                                    </button>
-                                <?php endif; ?>
-                            </div>
+                                <div class="category-actions">
+                                    <?php if($row['is_system'] == 0 && $row['uid'] == $user_id): ?>
+                                        <button class="edit-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
+                                            <i class='bx bx-edit'></i> Sửa
+                                        </button>
+                                        <button class="delete-btn" onclick="openDeleteModal(<?php echo $row['category_id']; ?>, '<?php echo htmlspecialchars($row['category_name'], ENT_QUOTES); ?>')">
+                                            <i class='bx bx-trash'></i> Xóa
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
+                            </a>
                         </li>
                     <?php endwhile; ?>
                 <?php endif; ?>
@@ -179,48 +181,47 @@ $expense_categories = getCategoriesForUser($conn, $user_id, 'Chi tiêu');
             <ul class="category-list">
                 <?php if($expense_categories->num_rows > 0): ?>
                     <?php while($row = $expense_categories->fetch_assoc()): ?>
-                        <li class="category-item <?php echo $row['is_system'] == 1 ? 'system-item' : 'personal-item'; ?>">
-                            <div class="category-header">
-                                <div class="category-icon">
-                                    <i class='<?php echo $row['category_icon']; ?>'></i>
+                        <li>
+                            <a href="detail_category.php?id=<?php echo $row['category_id']; ?>" class="category-item <?php echo $row['is_system'] == 1 ? 'system-item' : 'personal-item'; ?>">
+                                <div class="category-header">
+                                    <div class="category-icon">
+                                        <i class='<?php echo $row['category_icon']; ?>'></i>
+                                    </div>
+                                    <div class="category-name">
+                                        <?php echo htmlspecialchars($row['category_name']); ?>
+                                    </div>
                                 </div>
-                                <div class="category-name">
-                                    <?php echo htmlspecialchars($row['category_name']); ?>
-                                </div>
-                            </div>
-
-                            <div class="category-bages">
-                                <span class="type-badge expense-badge">
-                                    <?php echo $row['category_type']; ?>
-                                </span>
-                                <?php if($row['is_system'] == 1): ?>
-                                    <span class="system-badge">
-                                        <i class='bx bx-globe'></i>Hệ Thống
+                                <div class="category-bages">
+                                    <span class="type-badge expense-badge">
+                                        <?php echo $row['category_type']; ?>
                                     </span>
-                                <?php else: ?>
-                                    <span class="personal-badge">
-                                        <i class='bx bx-user'></i>Cá Nhân
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-
-                            <?php if(!empty($row['category_note'])): ?>
-                                <div class="category-note">
-                                    <i class='bx bx-note'></i>
-                                    <?php echo htmlspecialchars($row['category_note']); ?>
+                                    <?php if($row['is_system'] == 1): ?>
+                                        <span class="system-badge">
+                                            <i class='bx bx-globe'></i>Hệ Thống
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="personal-badge">
+                                            <i class='bx bx-user'></i>Cá Nhân
+                                        </span>
+                                    <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
-
-                            <div class="category-actions">
-                                <?php if($row['is_system'] == 0 && $row['uid'] == $user_id): ?>
-                                    <button class="edit-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
-                                        <i class='bx bx-edit'></i> Sửa
-                                    </button> 
-                                    <button class="delete-btn" onclick="openDeleteModal(<?php echo $row['category_id']; ?>, '<?php echo htmlspecialchars($row['category_name'], ENT_QUOTES); ?>')">
-                                        <i class='bx bx-trash'></i> Xóa
-                                    </button>
+                                <?php if(!empty($row['category_note'])): ?>
+                                    <div class="category-note">
+                                        <i class='bx bx-note'></i>
+                                        <?php echo htmlspecialchars($row['category_note']); ?>
+                                    </div>
                                 <?php endif; ?>
-                            </div>
+                                <div class="category-actions">
+                                    <?php if($row['is_system'] == 0 && $row['uid'] == $user_id): ?>
+                                        <button class="edit-btn" onclick="openEditModal(<?php echo $row['category_id']; ?>)">
+                                            <i class='bx bx-edit'></i> Sửa
+                                        </button>
+                                        <button class="delete-btn" onclick="openDeleteModal(<?php echo $row['category_id']; ?>, '<?php echo htmlspecialchars($row['category_name'], ENT_QUOTES); ?>')">
+                                            <i class='bx bx-trash'></i> Xóa
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
+                            </a>
                         </li>
                     <?php endwhile; ?>
                 <?php endif; ?>

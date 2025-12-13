@@ -37,7 +37,7 @@
                     <span class="tooltip">Doanh Mục</span>
             </li>
             <li>
-                <a href="budget.php">
+                <a href="header.php">
                     <i class="fa-solid fa-landmark"></i>
                     <span class="links-name">Ngân Sách</span>
                 </a>
