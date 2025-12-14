@@ -45,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_all'])) {
 
     if($delete_stmt->execute()) {
         $message = "Đã xóa thành công $delete_count giao dịch!";
-        header("refresh:1;url=income.php?month=" . $delete_month .($delete_category ? "&category=" . $delete_category : ""));
+        header("refresh:1;url=expense.php?month=" . $delete_month .($delete_category ? "&category=" . $delete_category : ""));
         exit();
     } else {
         $message = "Lỗi khi xóa giao dịch: " . $delete_stmt->error;
@@ -71,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_income'])) {
 
         if($stmt->execute()) {
             $message = 'Thêm chi tiêu thành công!';
-            header("refresh:1;url=income.php");
+            header("refresh:1;url=expense.php");
             exit();
         } else {
             $message = 'Lỗi khi thêm chi tiêu: ' . $stmt->error;
@@ -92,7 +92,7 @@ if(isset($_GET['delete_id'])) {
 
     if($stmt->execute()) {
         $message = 'Xóa chi tiêu thành công!';
-        header("refresh:1;url=income.php");
+        header("refresh:1;url=expense.php");
         exit();
     } else {
         $message = 'Lỗi khi xóa chi tiêu!';
@@ -336,7 +336,7 @@ $transactions = $transactions_stmt->get_result();
                             </div>
 
                             <div class="summary-value">
-                                +<?php echo number_format($total_income, 0, ',', '.'); ?> ₫
+                                -<?php echo number_format($total_income, 0, ',', '.'); ?> ₫
                             </div>
                         </div>
                             
@@ -469,7 +469,7 @@ $transactions = $transactions_stmt->get_result();
                 <div class="delete-all-info">
                     <p><strong>Thông tin sẽ bị xóa:</strong></p>
                     <p>• Tổng số giao dịch: <strong><?php echo $transactions->num_rows; ?></strong></p>
-                    <p>• Tổng số tiền: <strong>+<?php echo number_format($total_income, 0, ',', '.'); ?></strong></p>
+                    <p>• Tổng số tiền: <strong>-<?php echo number_format($total_income, 0, ',', '.'); ?></strong></p>
                     <p>• Tháng: <strong><?php echo $filter_month; ?></strong></p>
 
                     <?php if($filter_category):
@@ -554,7 +554,7 @@ $transactions = $transactions_stmt->get_result();
             const month = document.getElementById('filterMonth').value;
             const category = document.getElementById('filterCategory').value;
 
-            let url = `income.php?month=${month}`;
+            let url = `expense.php?month=${month}`;
             if(category) url += `&category=${category}`;
             window.location.href = url;
         }
@@ -602,7 +602,7 @@ $transactions = $transactions_stmt->get_result();
                 this.disabled = true;
                 
                 setTimeout(() => {
-                    window.location.href = `income.php?delete_id=${deleteTransactionId}`;
+                    window.location.href = `expense.php?delete_id=${deleteTransactionId}`;
                 }, 500);
             }
         });
