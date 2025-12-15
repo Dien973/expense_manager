@@ -316,26 +316,6 @@ if ($stmt) {
 }
 
 // ========================================================================== //
-$recent_transactions = [];
-$sql_recent = "SELECT t.*, c.category_name, c.category_icon
-               FROM transactions t
-               JOIN categories c ON t.category_id = c.category_id
-               WHERE t.uid = ? 
-               ORDER BY t.transaction_date DESC
-               LIMIT 20";
-
-$stmt = $conn->prepare($sql_recent);
-if ($stmt) {
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while($row = $result->fetch_assoc()) {
-        $recent_transactions[] = $row;
-    }
-    $stmt->close();
-}
-
-// ========================================================================== //
 $category_stats = [];
 $sql_stats = "SELECT c.category_name, c.category_type, c.category_icon,
                      SUM(CASE WHEN t.transaction_type = 'Thu nhập' THEN t.transaction_amount ELSE 0 END) as total_income,
@@ -390,7 +370,7 @@ if ($stmt) {
     <div class="main-container">
         <div class="report-container">
             <div class="report-header">
-                <h1><i class='bx bxs-report'></i> Báo Cáo Thống Kê</h1>
+                <h1><i class='bx bxs-report'></i> BÁO CÁO THỐNG KÊ</h1>
         
                 <div class="header-info">
                     <span class="header-text">
@@ -446,6 +426,7 @@ if ($stmt) {
                 </div>
             </div>
         </div>
+
         <div class="filter-section">
             <div class="filter-group">
                 <label><i class='bx bx-calendar'></i> Phạm vi:</label>

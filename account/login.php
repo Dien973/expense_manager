@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
          $_SESSION['admin_name'] = $row['uname'];
          $_SESSION['admin_email'] = $row['uemail'];
          $_SESSION['admin_id'] = $row['uid'];
-         header('location:ad_home.php');
+         header('location:../admin_page/ad_home.php');
 
       }elseif($row['urole'] == 'user'){
 
@@ -90,10 +90,6 @@ if(isset($message)){
             <input type="password" name="pass" class="box pwd" placeholder="Mật khẩu" required>
             <i class="fa-solid fa-eye eye toggle-eye"></i>
          </div>
-         <!--div>
-            <input id="remember-login" type="checkbox" name="remember">
-            <label for="remember-login">Ghi nhớ đăng nhập</label>
-         </div-->
          <div class="forgot-pwd" class="text"><a href="forgot_pwd.php">Quên mật khẩu?</a></div>
          <input type="submit" class="btn" name="submit" value="Đăng Nhập">
          <p>Bạn chưa có tài khoản? <a href="signup.php">Đăng kí ngay</a></p>

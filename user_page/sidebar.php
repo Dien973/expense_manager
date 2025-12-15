@@ -37,13 +37,6 @@
                     <span class="tooltip">Doanh Mục</span>
             </li>
             <li>
-                <a href="header.php">
-                    <i class="fa-solid fa-landmark"></i>
-                    <span class="links-name">Ngân Sách</span>
-                </a>
-                    <span class="tooltip">Ngân Sách</span>
-            </li>
-            <li>
                 <a href="report.php">
                     <i class='bx bxs-report' ></i>
                     <span class="links-name">Báo Cáo</span>
