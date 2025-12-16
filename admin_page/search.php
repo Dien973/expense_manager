@@ -7,8 +7,6 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 
-$_SESSION['previous_page'] = $_SERVER['HTTP_REFERER'] ?? 'ad_home.php';
-
 // ======================================================================= //
 $search_query = $_GET['q'] ?? '';
 $search_type = $_GET['type'] ?? 'all';
@@ -121,7 +119,7 @@ function highlightText($text, $search) {
     <div class="admin-main">
         <div class="admin-topbar">
             <div class="search-box">
-                <a href="<?php echo $_SESSION['previous_page']; ?>" class="back-btn">
+                <a href="javascript:history.back()" class="back-btn">
                     <i class='bx bx-arrow-back'></i>
                 </a>
                 <span>Kết quả tìm kiếm</span>

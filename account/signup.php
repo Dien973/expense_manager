@@ -5,32 +5,49 @@ session_start();
 
 if(isset($_POST['submit'])){
 
-   $filter_name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-   $name = mysqli_real_escape_string($conn, $filter_name);
-   $filter_email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
-   $email = mysqli_real_escape_string($conn, $filter_email);
-   $filter_pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
-   $pass = mysqli_real_escape_string($conn, $filter_pass);
-   $filter_cpass = filter_var($_POST['cpass'], FILTER_SANITIZE_STRING);
-   $cpass = mysqli_real_escape_string($conn, $filter_cpass);
+    $filter_name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $name = mysqli_real_escape_string($conn, $filter_name);
+    $filter_email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+    $email = mysqli_real_escape_string($conn, $filter_email);
+    $filter_pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
+    $pass = mysqli_real_escape_string($conn, $filter_pass);
+    $filter_cpass = filter_var($_POST['cpass'], FILTER_SANITIZE_STRING);
+    $cpass = mysqli_real_escape_string($conn, $filter_cpass);
 
-   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE uemail = '$email'") or die('Thất bại');
+    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE uemail = '$email'") or die('Thất bại');
 
-   if(mysqli_num_rows($select_users) > 0){
-      $message[] = 'Email người dùng đã tồn tại!';
-   }else{
-      if($pass != $cpass){
-         $message[] = 'Mật khẩu không khớp!';
-      }else{
-         mysqli_query($conn, "INSERT INTO `users`(uname, uemail, upwd) VALUES('$name', '$email', '$pass')") or die("Lỗi SQL: " . mysqli_error($conn));
-         $_SESSION['success'] = 'Đăng kí thành công!';
-         header('location:login.php');
-         exit();
-      }
-   }
+    if(mysqli_num_rows($select_users) > 0){
+       $message[] = 'Email người dùng đã tồn tại!';
+    }else{
+       if($pass != $cpass){
+            $message[] = 'Mật khẩu không khớp!';
+        }else{
+            mysqli_begin_transaction($conn);
 
+            try {
+                mysqli_query($conn, "INSERT INTO `users`(uname, uemail, upwd) VALUES('$name', '$email', '$pass')") or die("Lỗi SQL: " . mysqli_error($conn));
+
+                $user_id = mysqli_insert_id($conn);
+
+                $uphone = "Chưa cập nhật";
+                $ugender = "Khác";
+                $uimage = "avata_default.jpg";
+
+                $detail_query = "INSERT INTO `users_detail`(uid, uphone, ugender, uimage) 
+                                VALUES('$user_id', '$uphone', '$ugender', '$uimage')";
+                mysqli_query($conn, $detail_query) or die("Lỗi SQL (users_detail): " . mysqli_error($conn));
+
+                mysqli_commit($conn);
+                $_SESSION['success'] = 'Đăng kí thành công!';
+                header('location:login.php');
+                exit();
+            } catch (Exception $e) {
+                mysqli_rollback($conn);
+                $message[] = 'Lỗi đăng ký: ' . $e->getMessage();
+            }
+        }
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
